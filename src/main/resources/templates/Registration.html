@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="css/Add_Doctor.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	 
+   </head>
+<body>
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form action="#" th:action="@{/registerUser}" th:object="${registerbean}" method="post">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">First Name</span>
+            <input type="text" placeholder="Enter your first name" th:field="*{firstName}"  required>
+          </div>
+		    <div class="input-box">
+            <span class="details">Last Name</span>
+            <input type="text" placeholder="Enter your last name"  th:field="*{lastName}" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="email" placeholder="Enter your email" th:field="*{email}" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" placeholder="Enter your number" th:field="*{mobileNo}" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="text" placeholder="Enter your password" th:field="*{password}" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Confirm Password</span>
+            <input type="text" placeholder="Confirm your password"  required>
+          </div>
+        </div>
+		<div class="gender-details">
+                
+		<span class="gender-title">Role</span>
+		</div>
+    <select class="dropdown-menu">
+      <option>Admin</option>
+      <option>Patient</option>
+    </select><br><br>
+        <div class="gender-details">
+          <input type="radio" name="gender" id="dot-1">
+          <input type="radio" name="gender" id="dot-2">
+          <input type="radio" name="gender" id="dot-3">
+          <span class="gender-title">Gender</span>
+          <div class="category">
+            <label for="dot-1">
+            <span class="dot one"></span>
+            <span class="gender">Male</span>
+          </label>
+          <label for="dot-2">
+            <span class="dot two"></span>
+            <span class="gender">Female</span>
+          </label>
+          <label for="dot-3">
+            <span class="dot three"></span>
+            <span class="gender">Other</span>
+            </label>
+          </div>
+		
+        <div class="button">
+          <input type="submit" value="Register"> &emsp; &emsp;&emsp;&emsp;&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp;&emsp; 
+		  		  <a th:href="@{/login}" type>Back to login</a>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

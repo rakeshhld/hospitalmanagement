@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+<title>Hospital Patient Website</title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<link rel="stylesheet" type="text/css" href="css/Patient home.css">
+<script src="https://kit.fontawesome.com/441a11d967.js"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="rahul">
+		<div class="menubar">
+			<ul>
+				<li class="active" id="home"><a href="#"><i
+						class="fas fa-hospital"></i>&nbsp;&nbsp;Home</a></li>
+
+				<li><a href="#"><i class="far fa-calendar-check"></i>&nbsp;Appointment</a>
+					<div class="submenubar">
+						<ul>
+							<li><a href="#!" th:href="@{/appointmentPage}">Take Appointment</a></li>
+						</ul>
+					</div></li>
+				<li><a href="#"><i class="fas fa-stethoscope"></i>&nbsp;Check
+						Perception</a>
+					<div class="submenubar">
+						<ul>
+							<li><a href="#">Perception</a></li>
+						</ul>
+					</div></li>
+				<li><a href="#"><i class="fas fa-vials"></i>&nbsp;&nbsp;Lab
+						Report</a>
+					<div class="submenubar">
+						<ul>
+							<li><a href="#"> view Reports</a></li>
+
+						</ul>
+					</div></li>
+				<li><a href="#"><i class="fas fa-file-invoice-dollar"></i>&nbsp;&nbsp;Bills</a>
+					<div class="submenubar">
+						<ul>
+							<li><a href="#"> view bills</a></li>
+
+						</ul>
+					</div></li>
+				<li><a href="#!" th:href="@{/login}"><i class="fas fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+					</li>
+			</ul>
+		</div>
+	</div>
+	<footer>
+		<div class="main-content">
+			<div class="left box">
+				<h2>About us</h2>
+				<div class="content">
+					<p>Welcome to Rural Hospital, where we are committed to
+						providing you and your family with personalized care without
+						compromise. Rural Hospitals is the Best hospital in shirala
+						provides best patient care services, Health Care Services, and
+						Best facilities and Services for the Patients</p>
+					<div class="social">
+						<a href="#"><span class="fab fa-facebook-f"></span></a> <a
+							href="#"><span class="fab fa-twitter"></span></a> <a href="#"><span
+							class="fab fa-instagram"></span></a> <a href="#"><span
+							class="fab fa-youtube"></span></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="center box">
+				<h2>Address</h2>
+				<div class="content">
+					<div class="place">
+						<span class="fas fa-map-marker-alt"></span> <span class="text">Rural
+							Hospital Shirala Tal Shirala Dis Sangli, Maharashtra 415408</span>
+					</div>
+					<div class="phone">
+						<span class="fas fa-phone-alt"></span> <span class="text">02345-270149</span>
+					</div>
+					<div class="email">
+						<span class="fas fa-envelope"></span> <span class="text">ruralhospital001@gmail.com</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="right box">
+				<h2>Map</h2>
+				<div class="content">
+					<iframe
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3815.7713606075363!2d74.12148351389628!3d16.985793188320457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc1a3d5818d67c3%3A0xde93776b52f8e374!2sRural%20Hospital%2C%20Shirala!5e0!3m2!1sen!2sin!4v1625071960864!5m2!1sen!2sin"
+						width="400" height="300" style="border: 0;" allowfullscreen=""
+						loading="lazy"></iframe>
+				</div>
+			</div>
+		</div>
+		<div class="bottom">
+			<center>
+				<i><span class="credit">Created By Rahul S Paval</span></i>
+			</center>
+		</div>
+	</footer>
+</body>
+</html>
+
+
+

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="webjars/bootstrap/5.0.1/css/bootstrap.min.css"
+        rel="stylesheet">
+        <script src="webjars/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+        <script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Patient Home</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#appointment">Book Appointment</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">View Doctors</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                       <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <!-- <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">Link</a></li> -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My account</a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#!">Action</a>
+                                        <a class="dropdown-item" href="#!">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#!" th:href="@{/login}">LogOut</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Page content-->
+                <div class="container-fluid" id="appointment">
+                    <h1 class="mt-4">book appointment</h1>
+                    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+                    <p>
+                        Make sure to keep all page content within the
+                        <code>#page-content-wrapper</code>
+                        . The top navbar is optional, and just for demonstration. Just create an element with the
+                        <code>#sidebarToggle</code>
+                        ID which will toggle the menu when clicked.
+                    </p>
+                   
+                    	<!-- <input class="form-control" type="text" placeholder="doctor id" /> -->
+                    	<select id="doctrList">
+                    		<option value="0" >--Select Doctor--</option>
+                    	</select>
+                    	<input class="form-control" id="date_start" type="datetime-local"/>
+                    	<input class="form-control" id="date_end" type="datetime-local"/>
+                    	<button type="button" onclick="bookAppointment()" class="btn btn-primary">book appointment</button>
+                </div>
+            </div>
+        </div>
+        <!-- Core theme JS-->
+        <script>
+        window.addEventListener('DOMContentLoaded', event => {
+
+            // Toggle the side navigation
+            const sidebarToggle = document.body.querySelector('#sidebarToggle');
+            if (sidebarToggle) {
+                // Uncomment Below to persist sidebar toggle between refreshes
+                  if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+                     document.body.classList.toggle('sb-sidenav-toggled');
+                 } 
+                sidebarToggle.addEventListener('click', event => {
+                    event.preventDefault();
+                    document.body.classList.toggle('sb-sidenav-toggled');
+                    localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+                });
+            }
+
+        });
+        $( document ).ready(function() {
+            console.log( "ready!" );
+            loadDoctors();
+        });
+        
+        function loadDoctors(){
+        	  $.ajax({  
+                  type: "GET", 
+                  url: "/doctor",
+                  dataType: "json",
+                  contentType: "application/json",
+                  success: function (res)  
+                  {  
+                      $.each(res, function (data, value) {
+                          $("#doctrList").append($("<option></option>").val(value.doctorId).html( value.firstName +" "+value.lastname));  
+                      })  
+                  }  
+    
+              });  
+        	
+        }
+        function bookAppointment() {
+        	
+        	 $.ajax({  
+                 type: "POST", 
+                 url: "/appointment/patient/"+2+"/doctor/"+$("#doctrList").val(),
+                 dataType: "json",
+                 data: JSON.stringify({
+               	  "appointment_start_date":new Date($('#date_start').val()),
+            	  "appointment_end_date":new Date($('#date_end').val())
+            	}),
+                 contentType: "application/json",
+                 success: function (res)  
+                 {  
+                       if(res.result == "SUCCESS") {
+                    	   
+                    	   alert("success")
+                       }
+                 }  
+   
+             });  
+        	
+        }
+        </script>
+    </body>
+</html>
