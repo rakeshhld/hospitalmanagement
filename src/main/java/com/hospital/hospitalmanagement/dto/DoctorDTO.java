@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DoctorDTO {
+	private int doctorId;
 	private String firstName;
 	private String lastname;
 	private String dob;

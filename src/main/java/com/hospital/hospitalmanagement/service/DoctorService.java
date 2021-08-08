@@ -33,6 +33,16 @@ public class DoctorService {
 		return docRepo.save(doctor);
 	}
 	
+	
+	public Doctor updateDoctor(DoctorDTO docDTO) {
+		Optional<Doctor> optionalDoc = docRepo.findById(docDTO.getDoctorId());
+		if(optionalDoc.isPresent()){
+			 Doctor doc = optionalDoc.get();
+			 doc.setExperience(docDTO.getExperience());
+			 return docRepo.save(doc);
+		}
+		return null;
+	}
 	public List<Doctor> getAllDoctorsBySpecialization(String specialization) {
 		return docRepo.findAllBySpecialization(specialization);
 	}
@@ -44,7 +54,7 @@ public class DoctorService {
 	
 	@PostConstruct
 	public void addDoctor(){
-		DoctorDTO dto = new DoctorDTO("Dr, Rahul", "Batras", "26-04-1994", "general physician", "M.D", "M", 4);
+		DoctorDTO dto = new DoctorDTO(1,"Dr, Rahul", "Batras", "26-04-1994", "general physician", "M.D", "M", 4);
 		addDoctor(dto);
 	}
 

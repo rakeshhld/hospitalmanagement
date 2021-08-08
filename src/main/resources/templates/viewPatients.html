@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+	<link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <title>Add Doctor Details</title>
+    <link rel="stylesheet" href="css/Add_Doctor.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	 <script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+   </head>
+<body>
+  <div class="container">
+    <div class="title">view Patient Details</div>
+    <div class="content">
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th class="th-sm">firstname
+
+      </th>
+      <th class="th-sm">lastname
+
+      </th>
+    </tr>
+  </thead>
+  <tbody id="patientList" >
+  </tbody>
+  </table>
+    </div>
+   </div>
+  </body>
+  <script>
+  $( document ).ready(function() {
+      console.log( "ready!" );
+      loadDoctors();
+  });
+  
+  function loadDoctors(){
+  	  $.ajax({  
+            type: "GET", 
+            url: "/patient",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (res)  
+            {  
+               let html = "";
+            	$.each(res, function (data, value) {
+                    html += "<tr><td>"+ value.firstName+"</td><td>"+ value.lastName+"</td></tr>";
+                });
+            	$("#patientList").append(html);  
+            }  
+
+        });  
+  	
+  }
+  </script>
+</html>

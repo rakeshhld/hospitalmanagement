@@ -7,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hospital.hospitalmanagement.dao.Doctor;
 import com.hospital.hospitalmanagement.dao.Login;
 import com.hospital.hospitalmanagement.model.LoginBean;
 import com.hospital.hospitalmanagement.model.RegisterBean;
 import com.hospital.hospitalmanagement.repo.RegistrationRepo;
+import com.hospital.hospitalmanagement.service.DoctorService;
 import com.hospital.hospitalmanagement.service.LoginService;
 import com.hospital.hospitalmanagement.service.PatientRegistrationService;
 
@@ -24,6 +27,7 @@ public class FrontendController {
 	@Autowired LoginService loginService;
 	
 	@Autowired RegistrationRepo registerRepo;
+	@Autowired DoctorService docService;
 	
 	@GetMapping("/login")
 	public String loginPage(Model model){
@@ -77,7 +81,7 @@ public class FrontendController {
 	@PostMapping("/registerUser")
     public String registerUser(Model model,
             @ModelAttribute("registerbean") RegisterBean rb) {
-		boolean status = patientservice.Register(rb);
+		patientservice.Register(rb);
 		/*if(status && !rb.getRole().equals("admin")){
 			return "Patient_home";
 		} else {
@@ -103,6 +107,27 @@ public class FrontendController {
 	@GetMapping("/addPatient")
 	public String add_patient() {
 		return "add_patient";
+	}
+	
+	@GetMapping("/viewDoctor")
+	public String viewDoctor() {
+		return "viewDoctors";
+	}
+	@GetMapping("/viewPatient")
+	public String viewPatient() {
+		return "viewPatients";
+	}
+	
+	@GetMapping("/viewAppointment")
+	public String viewAppointment() {
+		return "viewAppointment";
+	}
+	@GetMapping("/updateDoctor/{Id}")
+	public String UpdateDoctor(@PathVariable("Id") String id,Model model) {
+		int patientId = Integer.parseInt(id);
+		Doctor doc =  docService.getDoctorByID(patientId);
+		model.addAttribute("doc",doc);
+		return "Docter-update";
 	}
 
 }
