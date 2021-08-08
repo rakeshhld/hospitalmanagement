@@ -44,6 +44,7 @@ public class PatientRegistrationService {
 		}
 		newloggginObj.setEmail(registerBean.getEmail());
 		newloggginObj.setPassword(registerBean.getPassword());
+		newloggginObj.setRole(registerBean.getRole());
 		registerRepo.save(newloggginObj);
 		ps.addPatient(patient);
 		return true;

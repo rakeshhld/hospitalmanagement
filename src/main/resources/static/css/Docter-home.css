@@ -11,7 +11,7 @@ html{
 .rahul{
 	min-height:100%;
 	background:no-repeat;
-	background-image:url(rp.jpg);
+	background-image:url(../images/rp.jpg);
 	background-position:center;
 	background-size:100% 100%;
 

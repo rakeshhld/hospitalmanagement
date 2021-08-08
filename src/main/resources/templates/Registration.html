@@ -43,9 +43,9 @@
                 
 		<span class="gender-title">Role</span>
 		</div>
-    <select class="dropdown-menu">
-      <option>Admin</option>
-      <option>Patient</option>
+    <select class="dropdown-menu" th:field="*{role}" required >
+      <option value="admin" >Admin</option>
+      <option value="patient" >Patient</option>
     </select><br><br>
         <div class="gender-details">
           <input type="radio" name="gender" id="dot-1">

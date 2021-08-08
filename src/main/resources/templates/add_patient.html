@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+	<link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <title>Add Patient Details</title>
+    <link rel="stylesheet" href="css/Add_Doctor.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	 <script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+   </head>
+<body>
+  <div class="container">
+    <div class="title">Add Patient Details</div>
+    <div class="content">
+      <form action="#">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">First Name</span>
+            <input id="fname"  type="text" placeholder="First Name" required>
+          </div>
+		    <div class="input-box">
+            <span class="details">Last Name</span>
+            <input id="lname" type="text" placeholder="Last Name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email ID:</span>
+            <input id="email" type="email" placeholder="Email ID:" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Mobile No:</span>
+            <input id="tel" type="tel" maxlength="10" placeholder="Mobile No:" required>
+          </div>
+          <div class="input-box">
+            <span class="details">B-Day Date:</span>
+            <input id="dob" type="date" placeholder="B_Day Date" required>
+          </div>
+          
+		            <div class="input-box">
+            <span class="details">Address:</span>
+            <input type="text" placeholder="Address:" required>
+          </div>
+        </div>
+		<div class="gender-details">
+                
+		<span class="gender-title">Blood group</span>
+		</div>
+    <select class="dropdown-menu">
+      <option class="d1">Blood group</option>
+                  <option class="d1">A+</option>
+                  <option class="d1">A-</option>
+				  <option class="d1">B+</option>
+                  <option class="d1">B-</option>
+				  <option class="d1">AB+</option>
+                  <option class="d1">AB-</option>
+				  <option class="d1">O+</option>
+                  <option class="d1">O-</option>
+    </select><br><br>
+        <div class="gender-details">
+          <input type="radio" name="gender" id="dot-1">
+          <input type="radio" name="gender" id="dot-2">
+          <input type="radio" name="gender" id="dot-3">
+          <span class="gender-title">Gender</span>
+          <div class="category">
+            <label for="dot-1">
+            <span class="dot one"></span>
+            <span class="gender">Male</span>
+          </label>
+          <label for="dot-2">
+            <span class="dot two"></span>
+            <span class="gender">Female</span>
+          </label>
+          <label for="dot-3">
+            <span class="dot three"></span>
+            <span class="gender">Other</span>
+            </label>
+          </div>
+		</div>
+	
+        <div class="button">
+          <input type="submit" value="Register" onclick="addPatient()"/>&nbsp &nbsp &nbsp
+		  <input type="reset" value="Reset" />&nbsp &nbsp &nbsp
+		  <a href="Docter home.html"type>Home</a>
+        </div>
+		
+
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+  
+    function addPatient(){
+    	 $.ajax({  
+             type: "POST", 
+             url: "/patient",
+             dataType: "json",
+             contentType: "application/json",
+             data: JSON.stringify({
+            	 "firstName": $('#fname').val(),
+            	 "lastname": $('#lname').val(),
+            	 "dob": $('#dob').val(),
+            	 "specialization": $('#spl').val(),
+            	 "education": $('#edu').val(),	
+            	 "gender": "male",
+         	     "phoneNumber":$("#tel").val,
+         	     "houseNo":"",
+         	     "street":"",
+         	     "area":"",
+         	     "city":"",
+         	     "district":"",
+         	     "taluk":"",
+         	     "pinCode":"",
+         	     "doctorId":"",
+        	}),
+            
+             success: function (res)  
+             {  
+                   
+                	   
+                	   alert("success")
+             }  
+
+         });  
+    	
+    }
+    </script>
+</html>

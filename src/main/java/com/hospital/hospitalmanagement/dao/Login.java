@@ -15,5 +15,6 @@ public class Login {
 	private int loginId;
 	private String email;
 	private String password;
+	private String role;
 
 }

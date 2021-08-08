@@ -9,6 +9,7 @@ public class RegisterBean {
 	private String email;
 	private long mobileNo;
 	private String password;
+	private String role;
 //	private String gender;
 
 }
